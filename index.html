@@ -1,10 +1,93 @@
 <!DOCTYPE html>
 <html>
-<head>
+
     <meta charset= "utf-8">
     <meta name="yiewport" content="width=device-width, initial-scale=1.8">
     <meta http-equiv="'X-UA-Compatible" content="ie=edge">
     <title>PRE-BC-B</title>
+    </head>
+    <h1 id="myHeader"> PRE-BC-B笔记</h1>
+    <body>
+    <ul>
+        <li>23年9月10日<a href="23:9:10.zip" download="23:9:10.zip">点击下载</a></li>
+
+    </ul>
+
+    <img src="语文.jpg" class="img preview"/>
+    <img src="历史.jpg" class="img preview" />
+    <img src="英语.jpg" class="img preview" />
+<script>
+    for (const img of document.querySelectorAll(".preview")) {
+
+
+        img.onclick = function () {
+            const container = document.createElement("div")
+            container.classList.add("preview-container")
+            container.onclick = function () {
+                container.remove()
+            }
+
+            const innerImg = document.createElement("img")
+            innerImg.classList.add("image")
+            innerImg.src = img.src
+
+            container.onwheel = function (event) {
+                if (event.deltaY < 0) {
+                    innerImg.style.width = `${innerImg.clientWidth * 1.2}px`
+                    innerImg.style.height = `${innerImg.clientHeight * 1.2}px`
+                } else if (event.deltaY > 0) {
+                    innerImg.style.width = `${innerImg.clientWidth * 0.8}px`
+                    innerImg.style.height = `${innerImg.clientHeight * 0.8}px`
+                }
+            }
+
+            container.append(innerImg)
+
+            document.body.append(container)
+        }
+    }
+</script>
+<style>
+    .img {
+        width: 50px;
+        height: 50px;
+
+        border: 1px solid black;
+
+        object-fit: contain;
+    }
+
+    .preview {
+        cursor: pointer;
+    }
+    .preview-container {
+        background-color: rgba(0, 0, 0, 0.6);
+
+        /* 占满整个屏幕 */
+        position: fixed;
+        margin: auto;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+
+        cursor: pointer;
+
+        /* 子元素水平上下居中 */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .preview-container .image {
+        /* 最大视窗大小的 90% */
+        max-width: 90vw;
+        max-height: 90vh;
+
+        object-fit: contain;
+    }
+</style>
+
     <style>
       body {
         width: 100vw;
@@ -40,11 +123,4 @@
             text-align: center;
         }
     </style>
-</head>
-<h1 id="myHeader"> PRE-BC-B笔记</h1>
-<body>
-  <ul>
-    <li>23年9月10日<a href="23:9:10.zip" download="23:9:10.zip">点击下载</a></li>
-  </ul>
-</body>
 </html>
